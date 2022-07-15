@@ -1,0 +1,119 @@
+<!-- Copyright (c) 2022, Christian Trisotto Alegri // chris.alegri@gmail.com
+Licensed under MIT. -->
+
+<!DOCTYPE html>
+<html>
+<head><link rel="stylesheet" href="./index.css" /></head>
+<script type="text/javascript" src="https://chir.ag/projects/ntc/ntc.js"></script>
+<script src="js.js"></script>
+<script id="testing">
+    function addCircle()
+    {
+        document.getElementById("printarea").value = "Clique para adicionar um PROCESSO";
+        var canvas = document.getElementById("canvas");
+        canvas.removeEventListener("mousedown", drawSquare, false)
+        canvas.removeEventListener("mousedown", drawLine, false);
+        canvas.removeEventListener("mousedown", removeSelected, false);
+        canvas.removeEventListener("mousedown", movethis, false);
+        canvas.addEventListener("mousedown", drawCircle, false);
+    }
+
+    function addSquare()
+    {
+      document.getElementById("printarea").value = "Clique para adicionar um RECURSO";
+      var canvas = document.getElementById("canvas");
+      canvas.removeEventListener("mousedown", drawLine, false);
+      canvas.removeEventListener("mousedown", drawCircle, false)
+      canvas.removeEventListener("mousedown", removeSelected, false);
+      canvas.removeEventListener("mousedown", movethis, false);
+      canvas.addEventListener("mousedown", drawSquare, false);
+    }
+
+    function addLine()
+    {
+      document.getElementById("printarea").value = "Clique para adicionar uma CONEXÃO";
+      var canvas = document.getElementById("canvas");
+      canvas.removeEventListener("mousedown", drawCircle, false)
+      canvas.removeEventListener("mousedown", drawSquare, false)
+      canvas.removeEventListener("mousedown", removeSelected, false);
+      canvas.removeEventListener("mousedown", movethis, false);
+      canvas.addEventListener("mousedown", drawLine, false);
+    }
+
+    function removeSelected1()
+    {
+      var canvas = document.getElementById("canvas");
+      canvas.removeEventListener("mousedown", drawCircle, false)
+      canvas.removeEventListener("mousedown", drawSquare, false)
+      canvas.removeEventListener("mousedown", drawLine, false);
+      canvas.removeEventListener("mousedown", movethis, false);
+      canvas.addEventListener("mousedown", removeSelected, false);
+      
+    }
+
+    function moveit()
+    {
+      var canvas = document.getElementById("canvas");
+      canvas.removeEventListener("mousedown", drawCircle, false)
+      canvas.removeEventListener("mousedown", drawSquare, false)
+      canvas.removeEventListener("mousedown", drawLine, false);
+      canvas.removeEventListener("mousedown", removeSelected, false);
+      canvas.addEventListener("mousedown", movethis, false);
+    }
+
+</script>
+
+<body>
+
+<link href="index.css" rel="stylesheet" />
+
+<button onclick="addLine()" class="addConnection">conectar</button>
+
+<button onclick="addCircle()" class="addProcess">add processo</button>
+
+<button onclick="addSquare()" class="addResource">add recurso</button>
+
+<button onclick="checkDeadlock()" class="checkDeadlock">check deadlock</button>
+
+<button onclick="removeSelected1()" class="removeSelected">remover elemento</button>
+
+<button onclick="moveit()" class="moveit">mover elemento</button>
+
+<button onclick="nextStep()" class="nextStep" id="nextStep" disabled="true">avançar</button>
+
+<button onclick="recarregar()" class="recarregar">recarregar</button>
+
+<button onclick="backwards()" class="backwards" id="backwards" disabled="true">voltar</button>
+
+<button onclick="location.reload()" class="reload">limpar tudo</button>
+
+
+<textarea
+class="textarea"
+id="printarea"
+></textarea>
+
+<input
+placeholder="qtd recurso"
+class="qtdRecurso"
+id="qtdRecurso"
+></input>
+
+<!-- <table id="tabelaProcessos" class="tabelaProcessos">
+  <tr>
+    <th>processos</th>
+</tr>
+</table>
+
+<table id="tabelaRecursos" class="tabelaRecursos">
+  <tr>
+    <th>recursos</th>
+</tr>
+</table> -->
+
+    <canvas id="canvas" width="1200" height="700">
+        
+    </canvas>
+    <img src="" alt="" top="0" left="0" width="5" height="5" id="imgArea">
+</body>
+</html>
